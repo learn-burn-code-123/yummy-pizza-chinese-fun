@@ -14,8 +14,7 @@ import {
   Fish,
   Carrot,
   Egg,
-  Apple,
-  Tomato
+  Apple
 } from 'lucide-react';
 
 type IngredientProps = {
@@ -27,7 +26,7 @@ type IngredientProps = {
 const iconComponents: Record<string, React.ReactNode> = {
   pizza: <Pizza size={40} />,
   cheese: <CircleDashed size={40} color="#FFD700" />,
-  tomato: <Tomato size={40} color="#FF6347" />,
+  tomato: <CircleDot size={40} color="#FF6347" />,
   mushroom: <Salad size={40} color="#8B4513" />,
   pepper: <CircleSlash size={40} color="#228B22" />,
   onion: <CircleDot size={40} color="#a78bfa" />,
