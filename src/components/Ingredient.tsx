@@ -2,7 +2,21 @@
 import React from 'react';
 import { useGame, Ingredient as IngredientType } from '@/context/GameContext';
 import { pronunciationAudio } from '@/utils/audioHelper';
-import { Pizza, Salad, CircleSlash, CircleDashed, CircleDot } from 'lucide-react';
+import { 
+  Pizza, 
+  Salad, 
+  CircleSlash, 
+  CircleDashed, 
+  CircleDot,
+  Banana,
+  Cherry,
+  Ham,
+  Fish,
+  Carrot,
+  LeafyGreen,
+  Pineapple,
+  Onion
+} from 'lucide-react';
 
 type IngredientProps = {
   ingredient: IngredientType;
@@ -12,11 +26,18 @@ type IngredientProps = {
 
 const iconComponents: Record<string, React.ReactNode> = {
   pizza: <Pizza size={40} />,
-  cheese: <CircleDashed size={40} />,
-  tomato: <CircleDot size={40} />,
-  mushroom: <Salad size={40} />,
-  pepper: <CircleSlash size={40} />,
-  onion: <CircleDashed size={40} color="#a78bfa" />,
+  cheese: <CircleDashed size={40} color="#FFD700" />,
+  tomato: <CircleDot size={40} color="#FF6347" />,
+  mushroom: <Salad size={40} color="#8B4513" />,
+  pepper: <CircleSlash size={40} color="#228B22" />,
+  onion: <Onion size={40} color="#a78bfa" />,
+  pineapple: <Pineapple size={40} color="#FFFF00" />,
+  cherry: <Cherry size={40} color="#800000" />,
+  ham: <Ham size={40} color="#FFA07A" />,
+  fish: <Fish size={40} color="#FFE4B5" />,
+  carrot: <Carrot size={40} color="#FFA500" />,
+  'leafy-green': <LeafyGreen size={40} color="#006400" />,
+  banana: <Banana size={40} color="#FFD700" />
 };
 
 const Ingredient: React.FC<IngredientProps> = ({ ingredient, onSelect, isSelected }) => {

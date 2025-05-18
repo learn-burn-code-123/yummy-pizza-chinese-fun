@@ -1,4 +1,3 @@
-
 import React, { createContext, useState, useContext, ReactNode } from 'react';
 
 export type Ingredient = {
@@ -83,6 +82,76 @@ const defaultIngredients: Ingredient[] = [
     chineseName: '洋葱', 
     icon: 'onion', 
     audio: 'onion.mp3' 
+  },
+  { 
+    id: 'pineapple', 
+    name: 'Pineapple', 
+    chineseName: '菠萝', 
+    icon: 'pineapple', 
+    audio: 'pineapple.mp3' 
+  },
+  { 
+    id: 'olives', 
+    name: 'Olives', 
+    chineseName: '橄榄', 
+    icon: 'cherry', 
+    audio: 'olives.mp3' 
+  },
+  { 
+    id: 'bacon', 
+    name: 'Bacon', 
+    chineseName: '培根', 
+    icon: 'ham', 
+    audio: 'bacon.mp3' 
+  },
+  { 
+    id: 'ham', 
+    name: 'Ham', 
+    chineseName: '火腿', 
+    icon: 'ham', 
+    audio: 'ham.mp3' 
+  },
+  { 
+    id: 'chicken', 
+    name: 'Chicken', 
+    chineseName: '鸡肉', 
+    icon: 'fish', 
+    audio: 'chicken.mp3' 
+  },
+  { 
+    id: 'spinach', 
+    name: 'Spinach', 
+    chineseName: '菠菜', 
+    icon: 'leafy-green', 
+    audio: 'spinach.mp3' 
+  },
+  { 
+    id: 'broccoli', 
+    name: 'Broccoli', 
+    chineseName: '西兰花', 
+    icon: 'leafy-green', 
+    audio: 'broccoli.mp3' 
+  },
+  { 
+    id: 'corn', 
+    name: 'Corn', 
+    chineseName: '玉米', 
+    icon: 'carrot', 
+    audio: 'corn.mp3' 
+  },
+  { 
+    id: 'basil', 
+    name: 'Basil', 
+    chineseName: '罗勒', 
+    icon: 'leafy-green', 
+    audio: 'basil.mp3' 
+  },
+  { 
+    id: 'garlic', 
+    name: 'Garlic', 
+    chineseName: '大蒜', 
+    icon: 'onion', 
+    audio: 'garlic.mp3' 
   }
 ];
 
@@ -91,21 +160,35 @@ const defaultLevels: Level[] = [
     id: 1,
     name: 'Cheese Pizza',
     chineseName: '奶酪比萨',
-    requiredIngredients: ['dough', 'sauce', 'cheese'],
+    requiredIngredients: ['dough', 'sauce', 'cheese', 'garlic', 'basil'],
     unlocked: true
   },
   {
     id: 2,
     name: 'Pepperoni Pizza',
     chineseName: '辣香肠比萨',
-    requiredIngredients: ['dough', 'sauce', 'cheese', 'pepperoni'],
+    requiredIngredients: ['dough', 'sauce', 'cheese', 'pepperoni', 'olives', 'mushroom'],
     unlocked: false
   },
   {
     id: 3,
     name: 'Veggie Pizza',
     chineseName: '素食比萨',
-    requiredIngredients: ['dough', 'sauce', 'cheese', 'mushroom', 'pepper', 'onion'],
+    requiredIngredients: ['dough', 'sauce', 'cheese', 'mushroom', 'pepper', 'onion', 'spinach', 'broccoli', 'corn', 'olives'],
+    unlocked: false
+  },
+  {
+    id: 4,
+    name: 'Meat Lovers',
+    chineseName: '肉食比萨',
+    requiredIngredients: ['dough', 'sauce', 'cheese', 'pepperoni', 'ham', 'bacon', 'chicken'],
+    unlocked: false
+  },
+  {
+    id: 5,
+    name: 'Hawaiian Pizza',
+    chineseName: '夏威夷比萨',
+    requiredIngredients: ['dough', 'sauce', 'cheese', 'ham', 'pineapple'],
     unlocked: false
   }
 ];
