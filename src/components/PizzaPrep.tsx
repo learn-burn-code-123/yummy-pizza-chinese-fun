@@ -2,7 +2,7 @@
 import React from 'react';
 import { useGame } from '@/context/GameContext';
 import { Button } from '@/components/ui/button';
-import { Oven } from 'lucide-react';
+import { Pizza } from 'lucide-react';
 import { playOvenSound } from '@/utils/audioHelper';
 
 const PizzaPrep: React.FC = () => {
@@ -109,7 +109,7 @@ const PizzaPrep: React.FC = () => {
         disabled={!selectedIngredients.includes('dough') || isCooking || isCooked}
         className="mt-6 bg-oven-brown hover:bg-oven-brown/80 text-white flex items-center gap-2"
       >
-        <Oven />
+        <Pizza />
         <span>烤比萨饼</span> {/* "Bake Pizza" in Chinese */}
       </Button>
     </div>

@@ -2,7 +2,7 @@
 import React from 'react';
 import { useGame, Ingredient as IngredientType } from '@/context/GameContext';
 import { pronunciationAudio } from '@/utils/audioHelper';
-import { Pizza, Cheese, Tomato, Mushroom, Pepper, Onion } from 'lucide-react';
+import { Pizza, Salad, CircleSlash, CircleDashed, CircleDot } from 'lucide-react';
 
 type IngredientProps = {
   ingredient: IngredientType;
@@ -12,11 +12,11 @@ type IngredientProps = {
 
 const iconComponents: Record<string, React.ReactNode> = {
   pizza: <Pizza size={40} />,
-  cheese: <Cheese size={40} />,
-  tomato: <Tomato size={40} />,
-  mushroom: <Mushroom size={40} />,
-  pepper: <Pepper size={40} />,
-  onion: <Onion size={40} />,
+  cheese: <CircleDashed size={40} />,
+  tomato: <CircleDot size={40} />,
+  mushroom: <Salad size={40} />,
+  pepper: <CircleSlash size={40} />,
+  onion: <CircleDashed size={40} color="#a78bfa" />,
 };
 
 const Ingredient: React.FC<IngredientProps> = ({ ingredient, onSelect, isSelected }) => {
