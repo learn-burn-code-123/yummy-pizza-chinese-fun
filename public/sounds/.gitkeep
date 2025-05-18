@@ -1,0 +1,4 @@
+
+# This folder will store audio files for the game
+# Each ingredient should have its own pronunciation file
+# Example: cheese.mp3, dough.mp3, etc.
