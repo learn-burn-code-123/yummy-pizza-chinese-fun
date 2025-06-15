@@ -1,4 +1,3 @@
-
 import React, { createContext, useState, useContext, ReactNode } from 'react';
 import { playErrorSound } from '@/utils/audioHelper';
 
@@ -229,22 +228,8 @@ export const GameProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   const finishCooking = () => {
     setIsCooking(false);
     setIsCooked(true);
-    
-    const currentLevelData = levels.find(level => level.id === currentLevel);
-    if (currentLevelData) {
-      const required = new Set(currentLevelData.requiredIngredients);
-      const selected = new Set(selectedIngredients);
-      
-      const isCorrect = required.size === selected.size && 
-                      [...required].every(ing => selected.has(ing));
-      
-      if (isCorrect) {
-        setIsLevelComplete(true);
-      } else {
-        setIsPizzaFailed(true);
-        playErrorSound();
-      }
-    }
+    // As requested, baking is always successful.
+    setIsLevelComplete(true);
   };
 
   const resetPizza = () => {
