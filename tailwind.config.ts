@@ -61,6 +61,8 @@ const config = {
         'level-btn': '#4aade9',
         'level-btn-locked': '#cbd5e0',
         'oven-brown': '#8b4513',
+        'oven-inside': '#2d2d2d',
+        'pizza-pan': '#a9a9a9',
       },
       borderRadius: {
         lg: "var(--radius)",

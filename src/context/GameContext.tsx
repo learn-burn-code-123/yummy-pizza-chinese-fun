@@ -1,4 +1,6 @@
+
 import React, { createContext, useState, useContext, ReactNode } from 'react';
+import { playErrorSound } from '@/utils/audioHelper';
 
 export type Ingredient = {
   id: string;
@@ -24,6 +26,7 @@ type GameContextType = {
   isCooking: boolean;
   isCooked: boolean;
   isLevelComplete: boolean;
+  isPizzaFailed: boolean;
   addIngredient: (ingredientId: string) => void;
   removeIngredient: (ingredientId: string) => void;
   startCooking: () => void;
@@ -158,37 +161,37 @@ const defaultIngredients: Ingredient[] = [
 const defaultLevels: Level[] = [
   {
     id: 1,
-    name: 'Cheese Pizza',
-    chineseName: '奶酪比萨',
-    requiredIngredients: ['dough', 'sauce', 'cheese', 'garlic', 'basil'],
+    name: 'Classic Duo',
+    chineseName: '经典二重奏',
+    requiredIngredients: ['dough', 'sauce', 'cheese', 'basil', 'garlic'],
     unlocked: true
   },
   {
     id: 2,
-    name: 'Pepperoni Pizza',
-    chineseName: '辣香肠比萨',
-    requiredIngredients: ['dough', 'sauce', 'cheese', 'pepperoni', 'olives', 'mushroom'],
+    name: 'Pepperoni Party',
+    chineseName: '辣香肠派对',
+    requiredIngredients: ['dough', 'sauce', 'cheese', 'basil', 'garlic', 'pepperoni', 'mushroom', 'olives'],
     unlocked: false
   },
   {
     id: 3,
-    name: 'Veggie Pizza',
-    chineseName: '素食比萨',
-    requiredIngredients: ['dough', 'sauce', 'cheese', 'mushroom', 'pepper', 'onion', 'spinach', 'broccoli', 'corn', 'olives'],
+    name: 'Veggie Delight',
+    chineseName: '素食之乐',
+    requiredIngredients: ['dough', 'sauce', 'cheese', 'basil', 'garlic', 'pepperoni', 'mushroom', 'olives', 'pepper', 'onion', 'corn'],
     unlocked: false
   },
   {
     id: 4,
     name: 'Meat Lovers',
-    chineseName: '肉食比萨',
-    requiredIngredients: ['dough', 'sauce', 'cheese', 'pepperoni', 'ham', 'bacon', 'chicken'],
+    chineseName: '肉食爱好者',
+    requiredIngredients: ['dough', 'sauce', 'cheese', 'basil', 'garlic', 'pepperoni', 'mushroom', 'olives', 'pepper', 'onion', 'corn', 'bacon', 'ham', 'chicken'],
     unlocked: false
   },
   {
     id: 5,
-    name: 'Hawaiian Pizza',
-    chineseName: '夏威夷比萨',
-    requiredIngredients: ['dough', 'sauce', 'cheese', 'ham', 'pineapple'],
+    name: 'The Works',
+    chineseName: '至尊全餐',
+    requiredIngredients: ['dough', 'sauce', 'cheese', 'pepperoni', 'mushroom', 'pepper', 'onion', 'pineapple', 'olives', 'bacon', 'ham', 'chicken', 'spinach', 'broccoli', 'corn', 'basil', 'garlic'],
     unlocked: false
   }
 ];
@@ -203,6 +206,7 @@ export const GameProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   const [isCooking, setIsCooking] = useState(false);
   const [isCooked, setIsCooked] = useState(false);
   const [isLevelComplete, setIsLevelComplete] = useState(false);
+  const [isPizzaFailed, setIsPizzaFailed] = useState(false);
 
   const addIngredient = (ingredientId: string) => {
     if (!selectedIngredients.includes(ingredientId)) {
@@ -226,15 +230,19 @@ export const GameProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     setIsCooking(false);
     setIsCooked(true);
     
-    // Check if the pizza has all required ingredients for the current level
     const currentLevelData = levels.find(level => level.id === currentLevel);
     if (currentLevelData) {
-      const hasAllRequired = currentLevelData.requiredIngredients.every(
-        ingredient => selectedIngredients.includes(ingredient)
-      );
+      const required = new Set(currentLevelData.requiredIngredients);
+      const selected = new Set(selectedIngredients);
       
-      if (hasAllRequired) {
+      const isCorrect = required.size === selected.size && 
+                      [...required].every(ing => selected.has(ing));
+      
+      if (isCorrect) {
         setIsLevelComplete(true);
+      } else {
+        setIsPizzaFailed(true);
+        playErrorSound();
       }
     }
   };
@@ -244,6 +252,7 @@ export const GameProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     setIsCooking(false);
     setIsCooked(false);
     setIsLevelComplete(false);
+    setIsPizzaFailed(false);
   };
 
   const completeLevel = () => {
@@ -277,6 +286,7 @@ export const GameProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
         isCooking,
         isCooked,
         isLevelComplete,
+        isPizzaFailed,
         addIngredient,
         removeIngredient,
         startCooking,
