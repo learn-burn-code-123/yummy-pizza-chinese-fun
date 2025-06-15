@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { defaultLevels, defaultIngredients } from '@/data/gameData';
 import { playErrorSound } from '@/utils/audioHelper';
@@ -38,9 +39,6 @@ export const useGameLogic = (): GameContextType => {
     setIsCooking(false);
     setIsCooked(true);
 
-    setIsPizzaFailed(false); // Pizza is always successful now
-
-    // Pizza is not failed. Now check for level completion.
     const level = levels.find(l => l.id === currentLevel);
     if (!level) return;
 
@@ -54,6 +52,10 @@ export const useGameLogic = (): GameContextType => {
     
     if (levelIsComplete) {
       setIsLevelComplete(true);
+      setIsPizzaFailed(false);
+    } else {
+      setIsPizzaFailed(true);
+      playErrorSound();
     }
   };
 
