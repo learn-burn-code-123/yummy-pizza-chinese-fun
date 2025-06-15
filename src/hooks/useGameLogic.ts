@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { defaultLevels, defaultIngredients } from '@/data/gameData';
 import { playErrorSound } from '@/utils/audioHelper';
@@ -38,25 +37,8 @@ export const useGameLogic = (): GameContextType => {
   const finishCooking = () => {
     setIsCooking(false);
     setIsCooked(true);
-
-    const level = levels.find(l => l.id === currentLevel);
-    if (!level) return;
-
-    const selectedIngredientsSet = new Set(selectedIngredients);
-    const requiredIngredientsSet = new Set(level.requiredIngredients);
-
-    // Level is complete if all required ingredients are present, extras are okay.
-    const levelIsComplete = [...requiredIngredientsSet].every(ingredient =>
-      selectedIngredientsSet.has(ingredient)
-    );
-    
-    if (levelIsComplete) {
-      setIsLevelComplete(true);
-      setIsPizzaFailed(false);
-    } else {
-      setIsPizzaFailed(true);
-      playErrorSound();
-    }
+    setIsLevelComplete(true);
+    setIsPizzaFailed(false);
   };
 
   const resetPizza = () => {
