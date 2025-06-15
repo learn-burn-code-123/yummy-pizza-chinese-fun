@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { defaultLevels, defaultIngredients } from '@/data/gameData';
 import { playErrorSound } from '@/utils/audioHelper';
@@ -15,13 +14,16 @@ export const useGameLogic = (): GameContextType => {
   const [isPizzaFailed, setIsPizzaFailed] = useState(false);
 
   const addIngredient = (ingredientId: string) => {
-    if (!selectedIngredients.includes(ingredientId)) {
-      setSelectedIngredients([...selectedIngredients, ingredientId]);
-    }
+    setSelectedIngredients(prevIngredients => {
+      if (!prevIngredients.includes(ingredientId)) {
+        return [...prevIngredients, ingredientId];
+      }
+      return prevIngredients;
+    });
   };
 
   const removeIngredient = (ingredientId: string) => {
-    setSelectedIngredients(selectedIngredients.filter(id => id !== ingredientId));
+    setSelectedIngredients(prevIngredients => prevIngredients.filter(id => id !== ingredientId));
   };
 
   const startCooking = () => {
@@ -36,16 +38,7 @@ export const useGameLogic = (): GameContextType => {
     setIsCooking(false);
     setIsCooked(true);
 
-    const hasSauce = selectedIngredients.includes('sauce');
-    const hasCheese = selectedIngredients.includes('cheese');
-
-    const pizzaIsFailed = !hasSauce || !hasCheese;
-    setIsPizzaFailed(pizzaIsFailed);
-
-    if (pizzaIsFailed) {
-      playErrorSound();
-      return;
-    }
+    setIsPizzaFailed(false); // Pizza is always successful now
 
     // Pizza is not failed. Now check for level completion.
     const level = levels.find(l => l.id === currentLevel);
