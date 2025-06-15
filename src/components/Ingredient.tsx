@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { useGame, Ingredient as IngredientType } from '@/context/GameContext';
 import { pronunciationAudio } from '@/utils/audioHelper';
@@ -12,7 +13,7 @@ import {
   Egg,
   Droplet,
   Beef,
-  Pineapple,
+  Citrus,
   Circle,
   Drumstick,
 } from 'lucide-react';
@@ -30,7 +31,7 @@ const iconComponents: Record<string, React.ReactNode> = {
   mushroom: <Salad size={40} color="#8B4513" />,
   pepper: <CircleSlash size={40} color="#228B22" />,
   onion: <CircleDot size={40} color="#a78bfa" />,
-  pineapple: <Pineapple size={40} color="#facc15" />,
+  pineapple: <Citrus size={40} color="#facc15" />,
   olives: <Circle size={40} fill="black" stroke="black" />,
   bacon: <Ham size={40} color="#e57373" />,
   ham: <Ham size={40} color="#FFA07A" />,
