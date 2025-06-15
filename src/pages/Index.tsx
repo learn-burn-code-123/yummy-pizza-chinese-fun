@@ -5,6 +5,7 @@ import PizzaPrep from '@/components/PizzaPrep';
 import IngredientsSelector from '@/components/IngredientsSelector';
 import LevelSelector from '@/components/LevelSelector';
 import LevelCompleteModal from '@/components/LevelCompleteModal';
+import MusicPlayer from '@/components/MusicPlayer';
 
 const Index = () => {
   return (
@@ -25,6 +26,7 @@ const Index = () => {
           
           <LevelCompleteModal />
         </div>
+        <MusicPlayer />
       </div>
     </GameProvider>
   );

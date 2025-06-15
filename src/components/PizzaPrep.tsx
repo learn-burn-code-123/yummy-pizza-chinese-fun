@@ -22,10 +22,10 @@ const PizzaPrep: React.FC = () => {
   // Display the pizza with selected ingredients
   return (
     <div className="flex flex-col items-center">
-      <div className={`relative w-64 h-64 rounded-full ${selectedIngredients.includes('dough') ? 'bg-pizza-crust' : 'bg-gray-200'} ${isCooking ? 'animate-cooking' : ''}`}>
+      <div className={`relative w-64 h-64 rounded-full ${selectedIngredients.includes('dough') ? 'bg-pizza-crust' : 'bg-gray-200'} ${isCooking ? 'animate-cooking' : ''} border-8 border-yellow-800/20 shadow-lg`}>
         {/* Base layer - sauce */}
         {selectedIngredients.includes('sauce') && (
-          <div className="absolute top-2 left-2 right-2 bottom-2 bg-pizza-sauce rounded-full"></div>
+          <div className="absolute top-2 left-2 right-2 bottom-2 bg-pizza-sauce rounded-full shadow-inner"></div>
         )}
 
         {/* Cheese layer */}
@@ -41,7 +41,7 @@ const PizzaPrep: React.FC = () => {
             {Array.from({ length: 8 }).map((_, i) => (
               <div 
                 key={`pepperoni-${i}`} 
-                className="w-8 h-8 rounded-full bg-red-700 m-1"
+                className="w-8 h-8 rounded-full bg-red-700 m-1 shadow-sm"
                 style={{ 
                   transform: `translate(${Math.sin(i * Math.PI/4) * 60}px, ${Math.cos(i * Math.PI/4) * 60}px)` 
                 }}
@@ -55,7 +55,7 @@ const PizzaPrep: React.FC = () => {
             {Array.from({ length: 6 }).map((_, i) => (
               <div 
                 key={`mushroom-${i}`} 
-                className="w-7 h-5 bg-gray-200 rounded-t-full m-1"
+                className="w-7 h-5 bg-gray-200 rounded-t-full m-1 shadow-sm"
                 style={{ 
                   transform: `translate(${Math.sin(i * Math.PI/3) * 50}px, ${Math.cos(i * Math.PI/3) * 50}px)` 
                 }}
@@ -71,7 +71,7 @@ const PizzaPrep: React.FC = () => {
             {Array.from({ length: 5 }).map((_, i) => (
               <div 
                 key={`pepper-${i}`} 
-                className="w-6 h-3 bg-green-500 rounded-full m-1 transform rotate-45"
+                className="w-6 h-3 bg-green-500 rounded-full m-1 transform rotate-45 shadow-sm"
                 style={{ 
                   transform: `translate(${Math.sin(i * Math.PI/2.5) * 55}px, ${Math.cos(i * Math.PI/2.5) * 55}px) rotate(${i * 36}deg)` 
                 }}
@@ -85,7 +85,7 @@ const PizzaPrep: React.FC = () => {
             {Array.from({ length: 7 }).map((_, i) => (
               <div 
                 key={`onion-${i}`} 
-                className="w-5 h-5 bg-purple-100 rounded-full m-1"
+                className="w-5 h-5 bg-purple-100 rounded-full m-1 shadow-sm"
                 style={{ 
                   transform: `translate(${Math.sin(i * Math.PI/3.5) * 45}px, ${Math.cos(i * Math.PI/3.5) * 45}px)` 
                 }}
@@ -102,7 +102,7 @@ const PizzaPrep: React.FC = () => {
             {Array.from({ length: 6 }).map((_, i) => (
               <div 
                 key={`pineapple-${i}`} 
-                className="w-6 h-6 bg-yellow-400 m-1 transform"
+                className="w-6 h-6 bg-yellow-400 m-1 transform shadow-sm"
                 style={{ 
                   clipPath: 'polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)',
                   transform: `translate(${Math.sin(i * Math.PI/3) * 50}px, ${Math.cos(i * Math.PI/3) * 50}px)` 
@@ -117,7 +117,7 @@ const PizzaPrep: React.FC = () => {
             {Array.from({ length: 9 }).map((_, i) => (
               <div 
                 key={`olive-${i}`} 
-                className="w-4 h-4 bg-gray-800 rounded-full m-1"
+                className="w-4 h-4 bg-gray-800 rounded-full m-1 shadow-sm"
                 style={{ 
                   transform: `translate(${Math.sin(i * Math.PI/4.5) * 55}px, ${Math.cos(i * Math.PI/4.5) * 55}px)` 
                 }}
@@ -133,7 +133,7 @@ const PizzaPrep: React.FC = () => {
             {Array.from({ length: 6 }).map((_, i) => (
               <div 
                 key={`bacon-${i}`} 
-                className="w-8 h-3 bg-red-400 m-1"
+                className="w-8 h-3 bg-red-400 m-1 shadow-sm"
                 style={{ 
                   transform: `translate(${Math.sin(i * Math.PI/3) * 50}px, ${Math.cos(i * Math.PI/3) * 50}px) rotate(${i * 60}deg)` 
                 }}
@@ -149,7 +149,7 @@ const PizzaPrep: React.FC = () => {
             {Array.from({ length: 5 }).map((_, i) => (
               <div 
                 key={`ham-${i}`} 
-                className="w-7 h-5 bg-pink-300 rounded m-1"
+                className="w-7 h-5 bg-pink-300 rounded m-1 shadow-sm"
                 style={{ 
                   transform: `translate(${Math.sin(i * Math.PI/2.5) * 50}px, ${Math.cos(i * Math.PI/2.5) * 50}px)` 
                 }}
@@ -163,7 +163,7 @@ const PizzaPrep: React.FC = () => {
             {Array.from({ length: 5 }).map((_, i) => (
               <div 
                 key={`chicken-${i}`} 
-                className="w-7 h-5 bg-yellow-100 rounded-sm m-1"
+                className="w-7 h-5 bg-yellow-100 rounded-sm m-1 shadow-sm"
                 style={{ 
                   transform: `translate(${Math.sin(i * Math.PI/2.5) * 45}px, ${Math.cos(i * Math.PI/2.5) * 45}px) rotate(${i * 72}deg)` 
                 }}
@@ -177,7 +177,7 @@ const PizzaPrep: React.FC = () => {
             {Array.from({ length: 7 }).map((_, i) => (
               <div 
                 key={`spinach-${i}`} 
-                className="w-5 h-3 bg-green-600 rounded-full m-1"
+                className="w-5 h-3 bg-green-600 rounded-full m-1 shadow-sm"
                 style={{ 
                   transform: `translate(${Math.sin(i * Math.PI/3.5) * 55}px, ${Math.cos(i * Math.PI/3.5) * 55}px) rotate(${i * 51}deg)` 
                 }}
@@ -191,7 +191,7 @@ const PizzaPrep: React.FC = () => {
             {Array.from({ length: 5 }).map((_, i) => (
               <div 
                 key={`broccoli-${i}`} 
-                className="relative w-6 h-6 m-1"
+                className="relative w-6 h-6 m-1 shadow-sm"
                 style={{ 
                   transform: `translate(${Math.sin(i * Math.PI/2.5) * 50}px, ${Math.cos(i * Math.PI/2.5) * 50}px)` 
                 }}
@@ -208,7 +208,7 @@ const PizzaPrep: React.FC = () => {
             {Array.from({ length: 12 }).map((_, i) => (
               <div 
                 key={`corn-${i}`} 
-                className="w-3 h-3 bg-yellow-300 rounded-full m-1"
+                className="w-3 h-3 bg-yellow-300 rounded-full m-1 shadow-sm"
                 style={{ 
                   transform: `translate(${Math.sin(i * Math.PI/6) * 55}px, ${Math.cos(i * Math.PI/6) * 55}px)` 
                 }}
@@ -222,7 +222,7 @@ const PizzaPrep: React.FC = () => {
             {Array.from({ length: 6 }).map((_, i) => (
               <div 
                 key={`basil-${i}`} 
-                className="w-6 h-4 bg-green-500 rounded-sm m-1"
+                className="w-6 h-4 bg-green-500 rounded-sm m-1 shadow-sm"
                 style={{ 
                   transform: `translate(${Math.sin(i * Math.PI/3) * 50}px, ${Math.cos(i * Math.PI/3) * 50}px) rotate(${i * 60}deg)` 
                 }}
@@ -238,7 +238,7 @@ const PizzaPrep: React.FC = () => {
             {Array.from({ length: 7 }).map((_, i) => (
               <div 
                 key={`garlic-${i}`} 
-                className="w-4 h-4 bg-gray-200 rounded-full m-1"
+                className="w-4 h-4 bg-gray-200 rounded-full m-1 shadow-sm"
                 style={{ 
                   transform: `translate(${Math.sin(i * Math.PI/3.5) * 45}px, ${Math.cos(i * Math.PI/3.5) * 45}px)` 
                 }}
