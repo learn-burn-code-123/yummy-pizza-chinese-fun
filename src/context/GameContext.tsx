@@ -1,3 +1,4 @@
+
 import React, { createContext, useState, useContext, ReactNode } from 'react';
 import { playErrorSound } from '@/utils/audioHelper';
 
@@ -232,11 +233,26 @@ export const GameProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     const hasSauce = selectedIngredients.includes('sauce');
     const hasCheese = selectedIngredients.includes('cheese');
 
-    if (hasSauce && hasCheese) {
-      setIsLevelComplete(true);
-    } else {
-      setIsPizzaFailed(true);
+    const pizzaIsFailed = !hasSauce || !hasCheese;
+    setIsPizzaFailed(pizzaIsFailed);
+
+    if (pizzaIsFailed) {
       playErrorSound();
+      return;
+    }
+
+    // Pizza is not failed. Now check for level completion.
+    const level = levels.find(l => l.id === currentLevel);
+    if (!level) return;
+
+    const selectedIngredientsSet = new Set(selectedIngredients);
+    const requiredIngredientsSet = new Set(level.requiredIngredients);
+
+    const levelIsComplete = selectedIngredientsSet.size === requiredIngredientsSet.size &&
+      [...selectedIngredientsSet].every(ingredient => requiredIngredientsSet.has(ingredient));
+    
+    if (levelIsComplete) {
+      setIsLevelComplete(true);
     }
   };
 
