@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { GameProvider } from '@/context/GameContext';
 import PizzaPrep from '@/components/PizzaPrep';
@@ -50,6 +49,7 @@ const Index = () => {
       ) : (
         <DndProvider backend={HTML5Backend}>
           <AppContent />
+          <CustomDragLayer />
         </DndProvider>
       )}
     </GameProvider>

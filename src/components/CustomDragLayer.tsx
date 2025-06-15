@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { useDragLayer } from 'react-dnd';
 import { Ingredient as IngredientType } from '@/types/game';
@@ -80,12 +79,12 @@ const CustomDragLayer: React.FC = () => {
     }
 
     return (
-        <div className={`flex flex-col items-center rounded-lg bg-green-200 shadow-lg ${isMobile ? 'p-2 scale-75' : 'p-3 scale-105'}`}>
-            <div className="mb-2 text-2xl">
+        <div className={`flex flex-col items-center ${isMobile ? 'scale-75' : 'scale-105'}`}>
+            <div className="mb-2 text-2xl drop-shadow-lg">
                 {iconComponents[item.icon] || <div className="w-10 h-10 bg-gray-300 rounded-full" />}
             </div>
-            <div className="text-lg font-bold">{item.chineseName}</div>
-            <div className="text-sm text-gray-600">{item.name}</div>
+            <div className="text-lg font-bold text-black drop-shadow-md">{item.chineseName}</div>
+            <div className="text-sm text-gray-700 drop-shadow-md">{item.name}</div>
         </div>
     );
   }
