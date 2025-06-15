@@ -1,3 +1,4 @@
+
 import React, { createContext, useState, useContext, ReactNode } from 'react';
 import { playErrorSound } from '@/utils/audioHelper';
 
@@ -47,7 +48,7 @@ const defaultIngredients: Ingredient[] = [
     id: 'sauce', 
     name: 'Sauce', 
     chineseName: '酱汁', 
-    icon: 'tomato', 
+    icon: 'sauce', 
     audio: 'sauce.mp3' 
   },
   { 
@@ -61,7 +62,7 @@ const defaultIngredients: Ingredient[] = [
     id: 'pepperoni', 
     name: 'Pepperoni', 
     chineseName: '辣香肠', 
-    icon: 'tomato', 
+    icon: 'pepperoni', 
     audio: 'pepperoni.mp3' 
   },
   { 
@@ -96,14 +97,14 @@ const defaultIngredients: Ingredient[] = [
     id: 'olives', 
     name: 'Olives', 
     chineseName: '橄榄', 
-    icon: 'cherry', 
+    icon: 'olives', 
     audio: 'olives.mp3' 
   },
   { 
     id: 'bacon', 
     name: 'Bacon', 
     chineseName: '培根', 
-    icon: 'ham', 
+    icon: 'bacon', 
     audio: 'bacon.mp3' 
   },
   { 
@@ -117,7 +118,7 @@ const defaultIngredients: Ingredient[] = [
     id: 'chicken', 
     name: 'Chicken', 
     chineseName: '鸡肉', 
-    icon: 'fish', 
+    icon: 'chicken', 
     audio: 'chicken.mp3' 
   },
   { 
@@ -138,7 +139,7 @@ const defaultIngredients: Ingredient[] = [
     id: 'corn', 
     name: 'Corn', 
     chineseName: '玉米', 
-    icon: 'carrot', 
+    icon: 'corn', 
     audio: 'corn.mp3' 
   },
   { 
@@ -152,7 +153,7 @@ const defaultIngredients: Ingredient[] = [
     id: 'garlic', 
     name: 'Garlic', 
     chineseName: '大蒜', 
-    icon: 'onion', 
+    icon: 'garlic', 
     audio: 'garlic.mp3' 
   }
 ];
@@ -201,7 +202,7 @@ export const GameProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   const [currentLevel, setCurrentLevel] = useState(1);
   const [levels, setLevels] = useState<Level[]>(defaultLevels);
   const [ingredients] = useState<Ingredient[]>(defaultIngredients);
-  const [selectedIngredients, setSelectedIngredients] = useState<string[]>([]);
+  const [selectedIngredients, setSelectedIngredients] = useState<string[]>(['dough']);
   const [isCooking, setIsCooking] = useState(false);
   const [isCooked, setIsCooked] = useState(false);
   const [isLevelComplete, setIsLevelComplete] = useState(false);
@@ -247,7 +248,7 @@ export const GameProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   };
 
   const resetPizza = () => {
-    setSelectedIngredients([]);
+    setSelectedIngredients(['dough']);
     setIsCooking(false);
     setIsCooked(false);
     setIsLevelComplete(false);

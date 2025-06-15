@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { useGame } from '@/context/GameContext';
 import { Button } from '@/components/ui/button';
@@ -223,7 +222,7 @@ const PizzaToppings = ({ selectedIngredients }: { selectedIngredients: string[] 
             {Array.from({ length: 7 }).map((_, i) => (
               <div 
                 key={`garlic-${i}`} 
-                className="w-4 h-4 bg-gray-200 rounded-full m-1 shadow-sm"
+                className="w-4 h-4 bg-yellow-50 rounded-full m-1 shadow-sm"
                 style={{ 
                   transform: `translate(${Math.sin(i * Math.PI/3.5) * 45}px, ${Math.cos(i * Math.PI/3.5) * 45}px)` 
                 }}
@@ -318,7 +317,7 @@ const PizzaPrep: React.FC = () => {
         ) : (
           <Button
             onClick={handleCook}
-            disabled={!selectedIngredients.includes('dough') || isCooking || isCooked}
+            disabled={selectedIngredients.length < 2 || isCooking || isCooked}
             className="bg-oven-brown hover:bg-oven-brown/80 text-white flex items-center gap-2"
           >
             <Pizza />
@@ -331,4 +330,3 @@ const PizzaPrep: React.FC = () => {
 };
 
 export default PizzaPrep;
-

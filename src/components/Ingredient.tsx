@@ -8,13 +8,13 @@ import {
   CircleSlash, 
   CircleDashed, 
   CircleDot,
-  Banana,
-  Cherry,
   Ham,
-  Fish,
-  Carrot,
   Egg,
-  Apple
+  Droplet,
+  Beef,
+  Pineapple,
+  Circle,
+  Drumstick,
 } from 'lucide-react';
 
 type IngredientProps = {
@@ -23,27 +23,21 @@ type IngredientProps = {
 };
 
 const iconComponents: Record<string, React.ReactNode> = {
-  pizza: <Pizza size={40} />,
+  pizza: <Pizza size={40} />, // for dough
+  sauce: <Droplet size={40} color="#cc6666" />,
   cheese: <CircleDashed size={40} color="#FFD700" />,
-  tomato: <CircleDot size={40} color="#FF6347" />,
+  pepperoni: <Beef size={40} color="#c04e4e" />,
   mushroom: <Salad size={40} color="#8B4513" />,
   pepper: <CircleSlash size={40} color="#228B22" />,
   onion: <CircleDot size={40} color="#a78bfa" />,
-  pineapple: <Banana size={40} color="#FFFF00" />,
-  cherry: <Cherry size={40} color="#800000" />,
+  pineapple: <Pineapple size={40} color="#facc15" />,
+  olives: <Circle size={40} fill="black" stroke="black" />,
+  bacon: <Ham size={40} color="#e57373" />,
   ham: <Ham size={40} color="#FFA07A" />,
-  fish: <Fish size={40} color="#FFE4B5" />,
-  carrot: <Carrot size={40} color="#FFA500" />,
+  chicken: <Drumstick size={40} color="#F5DEB3" />,
   'leafy-green': <Salad size={40} color="#006400" />,
-  banana: <Banana size={40} color="#FFD700" />,
-  garlic: <CircleDot size={40} color="#F5F5DC" />,
-  basil: <Salad size={40} color="#008000" />,
   corn: <Egg size={40} color="#FFFF00" />,
-  broccoli: <Salad size={40} color="#228B22" />,
-  spinach: <Salad size={40} color="#355E3B" />,
-  chicken: <Fish size={40} color="#F5DEB3" />,
-  bacon: <Ham size={40} color="#FF7F50" />,
-  olives: <Cherry size={40} color="#2F4F4F" />
+  garlic: <CircleDot size={40} color="#F5F5DC" />,
 };
 
 const Ingredient: React.FC<IngredientProps> = ({ ingredient, isSelected }) => {

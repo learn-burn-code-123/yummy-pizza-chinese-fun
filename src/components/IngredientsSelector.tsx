@@ -14,7 +14,7 @@ const IngredientsSelector: React.FC = () => {
   // Get available ingredients for current level
   const currentLevelData = levels.find(level => level.id === currentLevel);
   const availableIngredients = ingredients.filter(ingredient => 
-    currentLevelData?.requiredIngredients.includes(ingredient.id)
+    currentLevelData?.requiredIngredients.includes(ingredient.id) && ingredient.id !== 'dough'
   );
 
   return (
