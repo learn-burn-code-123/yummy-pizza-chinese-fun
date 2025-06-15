@@ -15,7 +15,7 @@ const LevelSelector: React.FC = () => {
   return (
     <div className="mb-6">
       <h2 className="text-xl font-bold mb-3 text-center">选择关卡</h2> {/* "Select Level" in Chinese */}
-      <div className="flex justify-center gap-2">
+      <div className="flex justify-center flex-wrap gap-2">
         {levels.map((level) => (
           <Tooltip key={level.id}>
             <TooltipTrigger asChild>

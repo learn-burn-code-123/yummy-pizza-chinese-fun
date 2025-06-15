@@ -11,17 +11,19 @@ const Index = () => {
   return (
     <GameProvider>
       <div className="min-h-screen bg-game-bg p-4">
-        <div className="max-w-md mx-auto">
-          <h1 className="text-3xl font-bold text-center mb-6">🍕 有趣的比萨烹饪</h1> {/* "Fun Pizza Cooking" in Chinese */}
+        <div className="max-w-5xl mx-auto">
+          <h1 className="text-2xl sm:text-3xl font-bold text-center mb-6">🍕 有趣的比萨烹饪</h1> {/* "Fun Pizza Cooking" in Chinese */}
           
           <LevelSelector />
           
-          <div className="bg-white rounded-lg shadow-md p-6 mb-6">
-            <PizzaPrep />
-          </div>
-          
-          <div className="bg-white rounded-lg shadow-md p-6">
-            <IngredientsSelector />
+          <div className="grid md:grid-cols-2 gap-6">
+            <div className="bg-white rounded-lg shadow-md p-4 sm:p-6">
+              <PizzaPrep />
+            </div>
+            
+            <div className="bg-white rounded-lg shadow-md p-4 sm:p-6">
+              <IngredientsSelector />
+            </div>
           </div>
           
           <LevelCompleteModal />
