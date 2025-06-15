@@ -1,9 +1,10 @@
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useGame } from '@/context/GameContext';
 import { Ingredient as IngredientType } from '@/types/game';
 import { pronunciationAudio } from '@/utils/audioHelper';
 import { useDrag } from 'react-dnd';
+import { getEmptyImage } from 'react-dnd-html5-backend';
 import { 
   Pizza, 
   Salad, 
@@ -45,14 +46,18 @@ const iconComponents: Record<string, React.ReactNode> = {
 const Ingredient: React.FC<IngredientProps> = ({ ingredient, isSelected }) => {
   const { isCooking, isCooked } = useGame();
 
-  const [{ isDragging }, drag] = useDrag(() => ({
+  const [{ isDragging }, drag, preview] = useDrag(() => ({
     type: 'ingredient',
-    item: { id: ingredient.id },
+    item: ingredient,
     canDrag: !isCooking && !isCooked,
     collect: (monitor) => ({
       isDragging: !!monitor.isDragging(),
     }),
   }));
+
+  useEffect(() => {
+    preview(getEmptyImage(), { captureDraggingState: true });
+  }, [preview]);
   
   const handleClick = () => {
     pronunciationAudio(ingredient.id);

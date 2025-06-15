@@ -9,6 +9,7 @@ import MusicPlayer from '@/components/MusicPlayer';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { TouchBackend } from 'react-dnd-touch-backend';
+import CustomDragLayer from '@/components/CustomDragLayer';
 
 // Detect if it's a touch device
 const isTouchDevice = typeof window !== 'undefined' && ('ontouchstart' in window || navigator.maxTouchPoints > 0);
@@ -34,6 +35,7 @@ const AppContent = () => (
       <LevelCompleteModal />
     </div>
     <MusicPlayer />
+    <CustomDragLayer />
   </div>
 );
 
