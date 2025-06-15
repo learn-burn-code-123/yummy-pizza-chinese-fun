@@ -2,8 +2,9 @@
 import React from 'react';
 import { useGame } from '@/context/GameContext';
 import { Button } from '@/components/ui/button';
-import { Pizza, RotateCcw } from 'lucide-react';
+import { Pizza, RotateCcw, Fire } from 'lucide-react';
 import { playOvenSound } from '@/utils/audioHelper';
+import { useDrop } from 'react-dnd';
 
 const PizzaToppings = ({ selectedIngredients }: { selectedIngredients: string[] }) => (
   <>
@@ -241,7 +242,18 @@ const PizzaPrep: React.FC = () => {
     isPizzaFailed,
     startCooking,
     resetPizza,
+    addIngredient,
   } = useGame();
+
+  const [{ isOver, canDrop }, drop] = useDrop(() => ({
+    accept: 'ingredient',
+    drop: (item: { id: string }) => addIngredient(item.id),
+    canDrop: () => !isCooking && !isCooked,
+    collect: (monitor) => ({
+      isOver: monitor.isOver(),
+      canDrop: monitor.canDrop(),
+    }),
+  }));
 
   const handleCook = () => {
     playOvenSound();
@@ -269,16 +281,30 @@ const PizzaPrep: React.FC = () => {
       <div className="h-80 flex items-center justify-center">
         {isCooking ? (
           <div className="relative w-80 h-80 bg-oven-inside rounded-lg border-8 border-gray-700 p-4 flex items-center justify-center overflow-hidden">
-            <div className="absolute top-2 left-1/2 -translate-x-1/2 w-32 h-4 bg-red-600 rounded-full blur-lg animate-pulse"></div>
+            <div className="absolute top-2 left-1/2 -translate-x-1/2 w-48 h-4 bg-red-600 rounded-full blur-xl animate-pulse"></div>
+            
+            <div className="absolute bottom-0 inset-x-0 h-1/4 flex justify-center items-end space-x-2">
+                <Fire className="text-orange-500 w-10 h-10 animate-pulse" style={{ animationDelay: '0s' }} />
+                <Fire className="text-yellow-400 w-14 h-14 animate-pulse" style={{ animationDelay: '0.2s' }} />
+                <Fire className="text-red-600 w-12 h-12 animate-pulse" style={{ animationDelay: '0.1s' }} />
+                <Fire className="text-yellow-400 w-14 h-14 animate-pulse" style={{ animationDelay: '0.3s' }} />
+                <Fire className="text-orange-500 w-10 h-10 animate-pulse" style={{ animationDelay: '0.4s' }} />
+            </div>
+            
             <div className="absolute w-72 h-72 rounded-full bg-pizza-pan shadow-2xl"></div>
             <div className="relative w-64 h-64 animate-cooking">
               {pizzaBase}
             </div>
-            <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-32 h-4 bg-red-600 rounded-full blur-lg animate-pulse"></div>
+            <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-48 h-4 bg-red-600 rounded-full blur-xl animate-pulse"></div>
           </div>
         ) : (
-          <div className={`relative w-64 h-64 rounded-full border-8 border-yellow-800/20`}>
+          <div ref={drop} className={`relative w-64 h-64 rounded-full border-8 transition-colors duration-300 ${isOver && canDrop ? 'border-green-400' : 'border-yellow-800/20'} ${canDrop ? 'cursor-copy' : ''}`}>
             {pizzaBase}
+            {isOver && canDrop && (
+              <div className="absolute inset-0 bg-green-500/20 rounded-full flex items-center justify-center">
+                <p className="text-white bg-black/50 px-4 py-1 rounded-md font-bold text-xl">放下!</p>
+              </div>
+            )}
           </div>
         )}
       </div>

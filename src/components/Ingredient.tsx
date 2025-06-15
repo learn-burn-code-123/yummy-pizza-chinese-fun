@@ -1,7 +1,7 @@
-
 import React from 'react';
 import { useGame, Ingredient as IngredientType } from '@/context/GameContext';
 import { pronunciationAudio } from '@/utils/audioHelper';
+import { useDrag } from 'react-dnd';
 import { 
   Pizza, 
   Salad, 
@@ -19,7 +19,6 @@ import {
 
 type IngredientProps = {
   ingredient: IngredientType;
-  onSelect: () => void;
   isSelected: boolean;
 };
 
@@ -47,17 +46,31 @@ const iconComponents: Record<string, React.ReactNode> = {
   olives: <Cherry size={40} color="#2F4F4F" />
 };
 
-const Ingredient: React.FC<IngredientProps> = ({ ingredient, onSelect, isSelected }) => {
+const Ingredient: React.FC<IngredientProps> = ({ ingredient, isSelected }) => {
+  const { isCooking, isCooked } = useGame();
+
+  const [{ isDragging }, drag] = useDrag(() => ({
+    type: 'ingredient',
+    item: { id: ingredient.id },
+    canDrag: !isCooking && !isCooked,
+    collect: (monitor) => ({
+      isDragging: !!monitor.isDragging(),
+    }),
+  }));
+  
   const handleClick = () => {
     pronunciationAudio(ingredient.id);
-    onSelect();
   };
+
+  const canInteract = !isCooking && !isCooked;
 
   return (
     <div 
-      className={`flex flex-col items-center p-3 rounded-lg cursor-pointer transition-all duration-300
+      ref={drag}
+      className={`flex flex-col items-center p-3 rounded-lg ${canInteract ? 'cursor-grab' : 'cursor-not-allowed'} transition-all duration-300
                  ${isSelected ? 'bg-green-200 scale-105' : 'bg-white hover:bg-gray-100'}`}
-      onClick={handleClick}
+      style={{ opacity: isDragging ? 0.4 : 1 }}
+      onClick={canInteract ? handleClick : undefined}
     >
       <div className="mb-2 text-2xl">
         {iconComponents[ingredient.icon] || <div className="w-10 h-10 bg-gray-300 rounded-full" />}
