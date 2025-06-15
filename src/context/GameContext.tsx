@@ -228,8 +228,16 @@ export const GameProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   const finishCooking = () => {
     setIsCooking(false);
     setIsCooked(true);
-    // As requested, baking is always successful.
-    setIsLevelComplete(true);
+
+    const hasSauce = selectedIngredients.includes('sauce');
+    const hasCheese = selectedIngredients.includes('cheese');
+
+    if (hasSauce && hasCheese) {
+      setIsLevelComplete(true);
+    } else {
+      setIsPizzaFailed(true);
+      playErrorSound();
+    }
   };
 
   const resetPizza = () => {
