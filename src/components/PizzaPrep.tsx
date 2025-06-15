@@ -2,7 +2,7 @@
 import React from 'react';
 import { useGame } from '@/context/GameContext';
 import { Button } from '@/components/ui/button';
-import { Pizza, RotateCcw, Fire } from 'lucide-react';
+import { Pizza, RotateCcw, Flame } from 'lucide-react';
 import { playOvenSound } from '@/utils/audioHelper';
 import { useDrop } from 'react-dnd';
 
@@ -284,11 +284,11 @@ const PizzaPrep: React.FC = () => {
             <div className="absolute top-2 left-1/2 -translate-x-1/2 w-48 h-4 bg-red-600 rounded-full blur-xl animate-pulse"></div>
             
             <div className="absolute bottom-0 inset-x-0 h-1/4 flex justify-center items-end space-x-2">
-                <Fire className="text-orange-500 w-10 h-10 animate-pulse" style={{ animationDelay: '0s' }} />
-                <Fire className="text-yellow-400 w-14 h-14 animate-pulse" style={{ animationDelay: '0.2s' }} />
-                <Fire className="text-red-600 w-12 h-12 animate-pulse" style={{ animationDelay: '0.1s' }} />
-                <Fire className="text-yellow-400 w-14 h-14 animate-pulse" style={{ animationDelay: '0.3s' }} />
-                <Fire className="text-orange-500 w-10 h-10 animate-pulse" style={{ animationDelay: '0.4s' }} />
+                <Flame className="text-orange-500 w-10 h-10 animate-pulse" style={{ animationDelay: '0s' }} />
+                <Flame className="text-yellow-400 w-14 h-14 animate-pulse" style={{ animationDelay: '0.2s' }} />
+                <Flame className="text-red-600 w-12 h-12 animate-pulse" style={{ animationDelay: '0.1s' }} />
+                <Flame className="text-yellow-400 w-14 h-14 animate-pulse" style={{ animationDelay: '0.3s' }} />
+                <Flame className="text-orange-500 w-10 h-10 animate-pulse" style={{ animationDelay: '0.4s' }} />
             </div>
             
             <div className="absolute w-72 h-72 rounded-full bg-pizza-pan shadow-2xl"></div>
@@ -331,3 +331,4 @@ const PizzaPrep: React.FC = () => {
 };
 
 export default PizzaPrep;
+
