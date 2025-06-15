@@ -46,17 +46,16 @@ const layerStyles: React.CSSProperties = {
 };
 
 function getItemStyles(
-  initialOffset: { x: number; y: number } | null,
-  currentOffset: { x: number; y: number } | null,
+  currentOffset: { x: number; y: number } | null
 ) {
-  if (!initialOffset || !currentOffset) {
+  if (!currentOffset) {
     return {
       display: 'none',
     };
   }
 
-  let { x, y } = currentOffset;
-  const transform = `translate(${x}px, ${y}px)`;
+  const { x, y } = currentOffset;
+  const transform = `translate(${x}px, ${y}px) translate(-50%, -50%)`;
   return {
     transform,
     WebkitTransform: transform,
@@ -65,11 +64,10 @@ function getItemStyles(
 
 const CustomDragLayer: React.FC = () => {
   const isMobile = useIsMobile();
-  const { item, itemType, isDragging, initialOffset, currentOffset } = useDragLayer((monitor) => ({
+  const { item, itemType, isDragging, currentOffset } = useDragLayer((monitor) => ({
     item: monitor.getItem() as IngredientType,
     itemType: monitor.getItemType(),
-    initialOffset: monitor.getInitialSourceClientOffset(),
-    currentOffset: monitor.getSourceClientOffset(),
+    currentOffset: monitor.getClientOffset(),
     isDragging: monitor.isDragging(),
   }));
 
@@ -95,7 +93,7 @@ const CustomDragLayer: React.FC = () => {
 
   return (
     <div style={layerStyles}>
-      <div style={getItemStyles(initialOffset, currentOffset)}>
+      <div style={getItemStyles(currentOffset)}>
         {renderItem()}
       </div>
     </div>
