@@ -1,6 +1,7 @@
 
 import React from 'react';
-import { useGame, Ingredient as IngredientType } from '@/context/GameContext';
+import { useGame } from '@/context/GameContext';
+import { Ingredient as IngredientType } from '@/types/game';
 import { pronunciationAudio } from '@/utils/audioHelper';
 import { useDrag } from 'react-dnd';
 import { 
