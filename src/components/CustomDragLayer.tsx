@@ -2,6 +2,7 @@
 import React from 'react';
 import { useDragLayer } from 'react-dnd';
 import { Ingredient as IngredientType } from '@/types/game';
+import { useIsMobile } from '@/hooks/use-mobile';
 import { 
   Pizza, 
   Salad, 
@@ -64,6 +65,7 @@ function getItemStyles(
 }
 
 const CustomDragLayer: React.FC = () => {
+  const isMobile = useIsMobile();
   const { item, itemType, isDragging, initialOffset, currentOffset } = useDragLayer((monitor) => ({
     item: monitor.getItem() as IngredientType,
     itemType: monitor.getItemType(),
@@ -78,7 +80,7 @@ const CustomDragLayer: React.FC = () => {
     }
 
     return (
-        <div className="flex flex-col items-center p-3 rounded-lg bg-green-200 scale-105 shadow-lg">
+        <div className={`flex flex-col items-center rounded-lg bg-green-200 shadow-lg ${isMobile ? 'p-2 scale-75' : 'p-3 scale-105'}`}>
             <div className="mb-2 text-2xl">
                 {iconComponents[item.icon] || <div className="w-10 h-10 bg-gray-300 rounded-full" />}
             </div>
