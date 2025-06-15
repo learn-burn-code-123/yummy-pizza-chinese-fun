@@ -35,7 +35,6 @@ const AppContent = () => (
       <LevelCompleteModal />
     </div>
     <MusicPlayer />
-    <CustomDragLayer />
   </div>
 );
 
@@ -46,6 +45,7 @@ const Index = () => {
       {isTouchDevice ? (
         <DndProvider backend={TouchBackend} options={{ enableMouseEvents: true, delayTouchStart: 100 }}>
           <AppContent />
+          <CustomDragLayer />
         </DndProvider>
       ) : (
         <DndProvider backend={HTML5Backend}>
