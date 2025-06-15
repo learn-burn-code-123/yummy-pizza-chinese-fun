@@ -54,8 +54,10 @@ export const useGameLogic = (): GameContextType => {
     const selectedIngredientsSet = new Set(selectedIngredients);
     const requiredIngredientsSet = new Set(level.requiredIngredients);
 
-    const levelIsComplete = selectedIngredientsSet.size === requiredIngredientsSet.size &&
-      [...selectedIngredientsSet].every(ingredient => requiredIngredientsSet.has(ingredient));
+    // Level is complete if all required ingredients are present, extras are okay.
+    const levelIsComplete = [...requiredIngredientsSet].every(ingredient =>
+      selectedIngredientsSet.has(ingredient)
+    );
     
     if (levelIsComplete) {
       setIsLevelComplete(true);
