@@ -2,72 +2,57 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Volume2, VolumeX } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { toast } from 'sonner';
 
 const MusicPlayer: React.FC = () => {
   const audioRef = useRef<HTMLAudioElement>(null);
-  const [isMuted, setIsMuted] = useState(true);
-  const [hasInteracted, setHasInteracted] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
 
+  // This effect runs once to set up an interaction listener that enables audio.
   useEffect(() => {
+    const playAudioOnInteraction = () => {
+      const audioElement = audioRef.current;
+      if (audioElement && audioElement.paused) {
+        audioElement.play().then(() => {
+          setIsPlaying(true);
+        }).catch(err => {
+          // Play was blocked, user needs to click button.
+          console.warn("Autoplay was blocked.", err);
+        });
+      }
+      // Remove listener after first interaction
+      window.removeEventListener('click', playAudioOnInteraction);
+      window.removeEventListener('keydown', playAudioOnInteraction);
+    };
+
+    window.addEventListener('click', playAudioOnInteraction, { once: true });
+    window.addEventListener('keydown', playAudioOnInteraction, { once: true });
+
+    return () => {
+      window.removeEventListener('click', playAudioOnInteraction);
+      window.removeEventListener('keydown', playAudioOnInteraction);
+    };
+  }, []);
+
+  const togglePlay = () => {
     const audioElement = audioRef.current;
     if (!audioElement) return;
 
-    const playAudio = () => {
-      audioElement.play().catch(error => {
-        if (error.name === 'NotAllowedError') {
-          console.warn('Background music autoplay was prevented by the browser.');
-          if (!hasInteracted) {
-            toast('Click anywhere to enable background music', {
-              id: 'music-toast',
-              duration: 10000,
-            });
-          }
-        }
+    if (isPlaying) {
+      audioElement.pause();
+      setIsPlaying(false);
+    } else {
+      audioElement.play().catch(err => {
+        console.error("Failed to play audio:", err);
       });
-    };
-
-    if (hasInteracted) {
-      setIsMuted(false);
-      playAudio();
-    }
-    
-    const onFirstInteraction = () => {
-      if (!hasInteracted) {
-        setHasInteracted(true);
-      }
-      window.removeEventListener('click', onFirstInteraction);
-      window.removeEventListener('keydown', onFirstInteraction);
-    };
-
-    window.addEventListener('click', onFirstInteraction, { once: true });
-    window.addEventListener('keydown', onFirstInteraction, { once: true });
-
-    return () => {
-      window.removeEventListener('click', onFirstInteraction);
-      window.removeEventListener('keydown', onFirstInteraction);
-    };
-
-  }, [hasInteracted]);
-  
-  useEffect(() => {
-      if (audioRef.current) {
-          audioRef.current.muted = isMuted;
-      }
-  }, [isMuted]);
-
-  const toggleMute = () => {
-    setIsMuted(!isMuted);
-    if (!hasInteracted) {
-        setHasInteracted(true);
+      setIsPlaying(true);
     }
   };
 
   return (
     <div className="fixed bottom-4 right-4 z-50">
       <audio ref={audioRef} src="/sounds/background.mp3" loop />
-      <Button onClick={toggleMute} variant="outline" size="icon">
-        {isMuted ? <VolumeX className="h-4 w-4" /> : <Volume2 className="h-4 w-4" />}
+      <Button onClick={togglePlay} variant="outline" size="icon">
+        {isPlaying ? <Volume2 className="h-4 w-4" /> : <VolumeX className="h-4 w-4" />}
       </Button>
     </div>
   );

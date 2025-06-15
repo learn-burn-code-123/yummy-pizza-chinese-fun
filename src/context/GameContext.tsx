@@ -1,4 +1,3 @@
-
 import React, { createContext, useState, useContext, ReactNode } from 'react';
 import { playErrorSound } from '@/utils/audioHelper';
 
@@ -256,15 +255,25 @@ export const GameProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   };
 
   const completeLevel = () => {
-    // Unlock next level if available
-    setLevels(prevLevels => 
-      prevLevels.map(level => {
-        if (level.id === currentLevel + 1) {
-          return { ...level, unlocked: true };
-        }
-        return level;
-      })
-    );
+    // Unlock next level if available and move to it
+    const nextLevelId = currentLevel + 1;
+    const nextLevel = levels.find(l => l.id === nextLevelId);
+
+    if (nextLevel) {
+      setLevels(prevLevels =>
+        prevLevels.map(level => {
+          if (level.id === nextLevelId) {
+            return { ...level, unlocked: true };
+          }
+          return level;
+        })
+      );
+      setCurrentLevel(nextLevelId);
+    } else {
+      // This is the last level, go back to level 1
+      setCurrentLevel(1);
+    }
+
     resetPizza();
   };
 
