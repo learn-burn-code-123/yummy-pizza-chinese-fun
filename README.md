@@ -1,73 +1,93 @@
-# Welcome to your Lovable project
 
-## Project info
+# Pizza Cooking Game
 
-**URL**: https://lovable.dev/projects/46457a42-6e55-41ee-aa9e-a43fb01fb0d5
+A fun and interactive pizza cooking game built with React and TypeScript. Learn to make pizzas by selecting the right ingredients and following recipes across multiple levels.
 
-## How can I edit this code?
+## Features
 
-There are several ways of editing your application.
+- **Multiple Levels**: Progress through different pizza recipes with increasing complexity
+- **Drag & Drop Interface**: Intuitive ingredient selection with drag and drop functionality
+- **Responsive Design**: Works on both desktop and mobile devices
+- **Interactive Cooking**: Visual feedback during the cooking process
+- **Chinese & English Support**: Bilingual ingredient names and interface
 
-**Use Lovable**
+## Technologies Used
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/46457a42-6e55-41ee-aa9e-a43fb01fb0d5) and start prompting.
+This project is built with modern web technologies:
 
-Changes made via Lovable will be committed automatically to this repo.
+- **React** - UI library for building interactive interfaces
+- **TypeScript** - Type-safe JavaScript for better development experience
+- **Vite** - Fast build tool and development server
+- **Tailwind CSS** - Utility-first CSS framework for styling
+- **shadcn/ui** - Beautiful and accessible UI components
+- **React DnD** - Drag and drop functionality
+- **Lucide React** - Beautiful icons
 
-**Use your preferred IDE**
+## Getting Started
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+### Prerequisites
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+- Node.js (version 16 or higher)
+- npm or yarn package manager
 
-Follow these steps:
+### Installation
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+1. Clone the repository:
+```bash
+git clone <your-repository-url>
+cd pizza-cooking-game
+```
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+2. Install dependencies:
+```bash
+npm install
+```
 
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+3. Start the development server:
+```bash
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+4. Open your browser and navigate to `http://localhost:5173`
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## How to Play
 
-**Use GitHub Codespaces**
+1. **Select a Level**: Choose from available pizza recipes
+2. **Add Ingredients**: Drag and drop ingredients onto the pizza base
+3. **Cook the Pizza**: Click the cook button to start the cooking process
+4. **Complete Levels**: Successfully complete pizzas to unlock new levels
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## Project Structure
 
-## What technologies are used for this project?
+```
+src/
+├── components/          # React components
+├── context/            # React context providers
+├── data/               # Game data and configurations
+├── hooks/              # Custom React hooks
+├── pages/              # Page components
+├── types/              # TypeScript type definitions
+└── utils/              # Utility functions
+```
 
-This project is built with:
+## Building for Production
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+To create a production build:
 
-## How can I deploy this project?
+```bash
+npm run build
+```
 
-Simply open [Lovable](https://lovable.dev/projects/46457a42-6e55-41ee-aa9e-a43fb01fb0d5) and click on Share -> Publish.
+The built files will be in the `dist` directory, ready for deployment to any static hosting service.
 
-## Can I connect a custom domain to my Lovable project?
+## Contributing
 
-Yes, you can!
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+## License
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+This project is open source and available under the [MIT License](LICENSE).
